@@ -58,14 +58,8 @@ def encrypt(message, key, N):
         for j in range(columns):
             ciphertext_letters[i, j] = chr(ciphertext[i, j] + 97)
    
-    # Parameters
-    # matrix: The input array to be flattened.
-    # order: This parameter specifies the order in which the elements are read from the array. It can take the following values:
-    # 'C' (default): Row-major (C-style) order.
-    # 'F': Column-major (Fortran-style) order.
-    # 'A': Fortran-style order if the array is Fortran contiguous in memory, C-style order otherwise.
-    # 'K': Elements are read in the order they occur in memory, except for reversing the data when strides are negative.
-    
+    # 'F': Column-major (Fortran-style) order. 
+    # Specifies the order in which the elements are read from the array
     return "".join(np.ravel(ciphertext_letters, order='F'))
 
 # Decryption  
@@ -77,7 +71,6 @@ def get_inverse(matrix, N):
     if np.gcd(det, N) == 1:
         matrix = sympy_matrix(matrix)
         return np.matrix(matrix.inv_mod(N))
-     # https://omz-software.com/pythonista/sympy/modules/matrices/matrices.html
     else:
         return None
     
@@ -133,9 +126,9 @@ def main():
     parser = argparse.ArgumentParser(
         description="Hill Cipher Encryption, Decryption, and Known Plaintext Attack",
         epilog="Example usage:\n"
-               "  python HILLCIPHER.PY --mode encrypt --message 'Your message here' --key '7,4;11,11'\n"
-               "  python HILLCIPHER.PY --mode decrypt --message 'Encrypted message here' --key '7,4;11,11'\n"
-               "  python HILLCIPHER.PY --mode known-plaintext-attack --plaintext 'Your plaintext here' --ciphertext 'Your ciphertext here' --key-length 2",
+               "  python3 HillCipher.py --mode encrypt --message 'Your message here' --key '7,4;11,11'\n"
+               "  python3 HillCipher.py --mode decrypt --message 'Encrypted message here' --key '7,4;11,11'\n"
+               "  python3 HillCipher.py --mode known-plaintext-attack --plaintext 'Your plaintext here' --ciphertext 'Your ciphertext here' --key-length 2",
         formatter_class=argparse.RawTextHelpFormatter
     )
     parser.add_argument("--mode", choices=["encrypt", "decrypt", "known-plaintext-attack"], default="encrypt", help="Mode: encrypt, decrypt, or known-plaintext-attack (default: encrypt)")
