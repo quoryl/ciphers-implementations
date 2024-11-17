@@ -7,10 +7,11 @@ def binary_modular_exponentiation(a, b, m):
 
     # a^b mod m
     d = 1
-    for k in indices:
-        two_power_k = pow(2, k[0]) * k[1] # 2^k * b_k    
-        local_result = pow(a, two_power_k, m) # a^(2^k * b_k) mod m
-        d = (d * local_result) % m
+    for k, b_k in enumerate(binary_representation):
+        if b_k == 1:
+            # Calculate a^(2^k) % m (only for b_k == 1)
+            local_result = pow(a, 2**k, m)
+            d = (d * local_result) % m
 
     return d
 
