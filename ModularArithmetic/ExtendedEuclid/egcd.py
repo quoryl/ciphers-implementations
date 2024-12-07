@@ -1,12 +1,12 @@
 
-a = 12
-b = 30
+a = 5
+b = 13
 
 def egcd(a, b):
-    x = 1    
-    u = 0    
-    y = 0
-    v = 1    
+    x = 0    
+    u = 1    
+    y = 1
+    v = 0    
     while a != 0:
         q = b // a
         r = b % a

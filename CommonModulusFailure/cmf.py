@@ -20,11 +20,23 @@ c2 = 411294544478239271886338859092185183748200324266700081787109375
 
 # calcolare x, y
 def egcd(a, b):
-    if a == 0:
-        return (b, 0, 1)
-    else:
-        g, y, x = egcd(b % a, a)
-        return (g, x - (b // a) * y, y)
+    x = 0    
+    u = 1    
+    y = 1
+    v = 0    
+    while a != 0:
+        q = b // a
+        r = b % a
+        s = x - q * u
+        t = y - q * v
+        b = a
+        a = r
+        x = u
+        y = v
+        u = s
+        v = t
+    gcd = b
+    return gcd, x, y
     
 g, x, y = egcd(e1, e2)
 print("Computed g, x, y: ", g, x, y)
