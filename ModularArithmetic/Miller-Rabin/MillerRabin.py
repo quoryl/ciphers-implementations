@@ -47,9 +47,9 @@ def miller_rabin(n, k=5):
     
     return True  # Probabilmente primo
 
-# Esempio d'uso
-n = 117  # Numero da testare
-if miller_rabin(n, k=10):
-    print(f"{n} è probabilmente primo.")
-else:
-    print(f"{n} è sicuramente composto.")
+# # Esempio d'uso
+# n = 117  # Numero da testare
+# if miller_rabin(n, k=10):
+#     print(f"{n} è probabilmente primo.")
+# else:
+#     print(f"{n} è sicuramente composto.")
