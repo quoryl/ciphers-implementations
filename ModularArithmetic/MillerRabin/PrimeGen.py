@@ -21,7 +21,3 @@ def generate_k_bit_number(k):
     n = (1 << (k - 1)) | middle_bits | 1
     
     return n
-
-n = generate_prime(10)
-
-print(n)
