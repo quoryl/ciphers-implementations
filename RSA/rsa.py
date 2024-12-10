@@ -131,6 +131,7 @@ def generate_key(p, q):
     return (e, d, n)
 
 def generate_crt_key(d, p, q):
+    # https://crypto.stackexchange.com/questions/2575/chinese-remainder-theorem-and-rsa
     # https://en.wikipedia.org/wiki/RSA_(cryptosystem)#Using_the_Chinese_remainder_algorithm
     dp = d % (p-1)
     dq = d % (q-1)
