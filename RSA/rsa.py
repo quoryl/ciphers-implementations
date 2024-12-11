@@ -33,18 +33,20 @@ def binary_modular_exponentiation(a, b, m):
 
     return result
 
+# Funzione per testare un singolo testimone
+def is_composite(a, s, d, n):
+    # Calcolo di a^d % n
+    x = pow(a, d, n) 
+    if x == 1 or x == n - 1:
+        return False 
+    # Calcola le potenze successive
+    for _ in range(s - 1):
+        x = pow(x, 2, n)
+        if x == n - 1:
+            return False  # a non è un testimone di compositeness
+    return True  # a è un testimone di compositeness
+
 def miller_rabin(n, k=5):
-    """
-    Esegue il test di Miller-Rabin per verificare se n è probabilmente primo.
-    
-    Parametri:
-    - n: numero da testare (deve essere >= 2).
-    - k: numero di testimoni casuali da provare (default: 5).
-    
-    Ritorna:
-    - True se n è probabilmente primo.
-    - False se n è sicuramente composto.
-    """
     # Caso base: numeri piccoli
     if n <= 1:
         return False
@@ -59,25 +61,11 @@ def miller_rabin(n, k=5):
         s += 1
         d //= 2
     
-    # Funzione per testare un singolo testimone
-    def is_composite(a):
-        # Calcolo di a^d % n
-        x = pow(a, d, n)  # Esponenziazione modulare
-        if x == 1 or x == n - 1:
-            return False  # a non è un testimone di compositeness
-        # Calcola le potenze successive: a^(d*2^r) % n
-        for _ in range(s - 1):
-            x = pow(x, 2, n)
-            if x == n - 1:
-                return False  # a non è un testimone di compositeness
-        return True  # a è un testimone di compositeness
-    
     # Esegui il test per k testimoni casuali
     for _ in range(k):
-        a = random.randint(2, n - 2)  # Scegli un testimone casuale
-        if is_composite(a):
+        a = random.randint(2, n - 2)
+        if is_composite(a, s, d, n):
             return False  # Sicuramente composto
-    
     return True  # Probabilmente primo
 
 
@@ -94,27 +82,13 @@ def generate_k_bit_number(k):
     # Generate a random number with k-2 bits (between 0 and 2^(k-2) - 1)
     # This will be the middle bits of the k-bit number
     # The MSB and LSB will be set to 1
-    # k = 5, k-2 = 3, so the number should be between 000 and 111 > 0, 1, 2, 3, 4, 5, 6, 7, random.randint(0, 7)
+    # k = 5, k-2 = 3, so the number should be between 000 and 111: 0, 1, 2, 3, 4, 5, 6, 7, random.randint(0, 7)
     # 7 = 111 = 2^3 - 1 where 3 is k-2
     middle_bits = random.randint(0, (1 << (k - 2)) - 1)
     
     n = (1 << (k - 1)) | middle_bits | 1
     
     return n
-
-# implementation of RSA algorithm
-# two versions, with and without CRT
-
-# RSA encryption E(m) = m^e mod n
-# RSA decryption D(c) = c^d mod n
-
-# I need to generate p,q, n, e, d, phi
-
-# p,q are two large prime numbers
-# n = p*q
-# phi = (p-1)(q-1)
-# e is a number that is coprime with phi
-# d is the modular multiplicative inverse of e mod phi
 
 def generate_key(p, q):
     n = p*q
