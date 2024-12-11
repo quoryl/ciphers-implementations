@@ -172,7 +172,7 @@ Commands:
                       Parameters:
                         -n: Number to test
                         -k: Number of rounds (default: 5)
-                      Output: Is probably prime
+                      Output: primality result (probably true or false)
                       Example: python3 rsa.py miller_rabin -n 17
 
   generate_prime      Generate Prime Number
