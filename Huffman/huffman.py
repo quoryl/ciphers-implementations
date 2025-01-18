@@ -28,7 +28,7 @@ def walk_root(root):
             stack.append((node.left, new_code))
 
     is_valid = is_prefix_free(huffman_codes)
-    print("Is prefix-free: ", is_valid)
+    # print("Is prefix-free: ", is_valid)
     return huffman_codes
 
 def create_huffman_codes(symbols, probabilities):
@@ -77,7 +77,7 @@ def encode(characters, probabilities, message):
     if not (len(characters) == len(probabilities)):
         raise ValueError("Length of characters and probabilities must be equal: len(characters) = ", len(characters), "len(probabilities) = ", len(probabilities))
     huffman_code = create_huffman_codes(characters, probabilities)
-    print(huffman_code)
+    # print(huffman_code)
     encoded_message = ''
     stripped_message = message.translate(str.maketrans('', '', string.punctuation)).replace(' ', '').replace("\n", '').lower()
     for char in stripped_message:
@@ -95,6 +95,6 @@ def run_demo():
     print(decoded_message)
 
 
-run_demo()
+# run_demo()
 
 
