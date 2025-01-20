@@ -5,7 +5,7 @@ def read_text_file(file_path):
     with open(file_path, 'r', encoding='utf-8') as file:
         return file.read()
 
-file_path = os.path.join(os.path.dirname(__file__), 'dorian_gray.txt')
+file_path = os.path.join(os.path.dirname(__file__), 'kafka.txt')
 text = read_text_file(file_path)
 
 def preprocess_text(text):
@@ -14,6 +14,6 @@ def preprocess_text(text):
     return text
 
 preprocessed_text = preprocess_text(text)
-output_file_path = os.path.join(os.path.dirname(__file__), 'preprocessed_dorian_gray.txt')
+output_file_path = os.path.join(os.path.dirname(__file__), 'preprocessed_kafka.txt')
 with open(output_file_path, 'w', encoding='utf-8') as output_file:
     output_file.write(preprocessed_text)
